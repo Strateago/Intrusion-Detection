@@ -1,0 +1,201 @@
+##### Loaded paths dictionary #####
+{
+    "config": {
+        "dataset": "TOW_IDS_dataset",
+        "labeling_schema": "TOW_IDS_dataset_one_class",
+        "multiclass": false,
+        "number_of_bytes": 58,
+        "suffix": "train",
+        "sum_x": true,
+        "window_size": 44,
+        "window_slide": 1
+    },
+    "feature_generator": "CNNIDSFeatureGenerator",
+    "paths": {
+        "output_path": "output/RF",
+        "training_packets_path": "TOW_dataset/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap",
+        "y_train_path": "TOW_dataset/y_train.csv"
+    }
+}
+filter_avtp_packets = False
+> Selected feature generator: CNNIDSFeatureGenerator
+> Generating features...
+>> Loading raw packets...
+>> Preprocessing raw packets...
+>> Aggregating and labeling...
+Feature generator successfully executed!
+##### Loaded paths dictionary #####
+{
+    "config": {
+        "dataset": "TOW_IDS_dataset",
+        "labeling_schema": "TOW_IDS_dataset_one_class",
+        "multiclass": false,
+        "number_of_bytes": 58,
+        "suffix": "test",
+        "sum_x": true,
+        "window_size": 44,
+        "window_slide": 1
+    },
+    "feature_generator": "CNNIDSFeatureGenerator",
+    "paths": {
+        "output_path": "output/RF",
+        "training_packets_path": "TOW_dataset/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap",
+        "y_train_path": "TOW_dataset/y_test.csv"
+    }
+}
+filter_avtp_packets = False
+> Selected feature generator: CNNIDSFeatureGenerator
+> Generating features...
+>> Loading raw packets...
+>> Preprocessing raw packets...
+>> Aggregating and labeling...
+Feature generator successfully executed!
+##### Loaded configuration fils #####
+{
+    "feat_gen": {
+        "config": {
+            "dataset": "TOW_IDS_dataset",
+            "labeling_schema": "TOW_IDS_dataset_one_class",
+            "multiclass": false,
+            "number_of_bytes": 58,
+            "sum_x": true,
+            "window_size": 44,
+            "window_slide": 1
+        },
+        "feature_generator": "CNNIDSFeatureGenerator",
+        "load_paths": {
+            "X_path": "output/RF/X_train_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
+            "y_path": "output/RF/y_train_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
+        }
+    },
+    "model_specs": {
+        "framework": "sklearn",
+        "hyperparams_grid": {
+            "clf__bootstrap": [
+                true
+            ],
+            "clf__max_depth": [
+                4,
+                6,
+                10
+            ],
+            "clf__max_features": [
+                3,
+                5,
+                7
+            ],
+            "clf__n_estimators": [
+                50,
+                100,
+                200
+            ],
+            "clf__random_state": [
+                42
+            ]
+        },
+        "model": "SklearnClassifier",
+        "model_name": "RandomForestClassifier",
+        "model_params": {
+            "bootstrap": true,
+            "max_depth": 10,
+            "max_features": 7,
+            "n_estimators": 200,
+            "random_state": 42
+        },
+        "paths": {
+            "metrics_output_path": "output/RF/metrics",
+            "models_output_path": "output/RF/models"
+        }
+    }
+}
+> Loading features...
+filter_avtp_packets = False
+shape X = (1203692, 116)
+shape Y = (1203692,)
+> Creating model...
+> Initializing model training and evaluation...
+[ Using Seed :  10  ]
+>> Execute
+>> X.shape = (1203692, 116)
+>> y.shape = (1203692,)
+Model trained successfully!
+Executing main function...
+##### Loaded configuration files #####
+{
+    "feat_gen": {
+        "config": {
+            "dataset": "TOW_IDS_dataset",
+            "labeling_schema": "TOW_IDS_dataset_one_class",
+            "multiclass": false,
+            "number_of_bytes": 58,
+            "sum_x": true,
+            "window_size": 44,
+            "window_slide": 1
+        },
+        "feature_generator": "CNNIDSFeatureGenerator",
+        "load_paths": {
+            "X_path": "output/RF/X_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
+            "y_path": "output/RF/y_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
+        }
+    },
+    "model_specs": {
+        "framework": "sklearn",
+        "hyperparams_grid": {
+            "clf__bootstrap": [
+                true
+            ],
+            "clf__max_depth": [
+                4,
+                6,
+                10
+            ],
+            "clf__max_features": [
+                3,
+                5,
+                7
+            ],
+            "clf__n_estimators": [
+                50,
+                100,
+                200
+            ],
+            "clf__random_state": [
+                42
+            ]
+        },
+        "model": "SklearnClassifier",
+        "model_name": "RandomForestClassifier",
+        "model_params": {
+            "bootstrap": true,
+            "max_depth": 10,
+            "max_features": 7,
+            "n_estimators": 200,
+            "random_state": 42
+        },
+        "paths": {
+            "forward_output_path": "output/forward",
+            "metrics_output_path": "output/RF/metrics",
+            "models_output_path": "output/RF/models"
+        },
+        "presaved_paths": {
+            "entire": "output/RF/models/RandomForestClassifier_entire_dataset_.pkl"
+        }
+    }
+}
+> Loading features...
+filter_avtp_packets = False
+shape X = (791566, 116)
+shape Y = (791566,)
+DEBUG: len(data) = 791566
+> Creating model...
+> Initializing model test...
+[ Using Seed :  10  ]
+Current selected label: 1
+------------fold no---------entire----------------------
+Model tested successfully!
+[Erro ao carregar a matriz de confusão]
+[Errno 2] No such file or directory: 'RF/metrics/attack_1_confusion_matrix_TOW_IDS_dataset_one_class_fold_entire_RandomForestClassifier.csv'
+[Erro ao carregar curva ROC]
+[Errno 2] No such file or directory: 'RF/metrics/attack_1_roc_metrics_TOW_IDS_dataset_one_class_fold_entire_RandomForestClassifier.csv'
+[Erro ao carregar métricas]
+[Errno 2] No such file or directory: 'RF/metrics/attack_1_test_metrics_sklearn_RandomForestClassifier.csv'

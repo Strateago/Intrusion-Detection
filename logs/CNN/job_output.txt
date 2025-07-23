@@ -1,0 +1,50 @@
+##### Loaded paths dictionary #####
+{
+    "config": {
+        "dataset": "TOW_IDS_dataset",
+        "labeling_schema": "TOW_IDS_dataset_multi_class",
+        "multiclass": true,
+        "number_of_bytes": 58,
+        "suffix": "train",
+        "window_size": 44,
+        "window_slide": 1
+    },
+    "feature_generator": "CNNIDSFeatureGenerator",
+    "paths": {
+        "output_path": "output/CNN",
+        "training_packets_path": "TOW_dataset/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap",
+        "y_train_path": "TOW_dataset/y_train.csv"
+    }
+}
+filter_avtp_packets = False
+> Selected feature generator: CNNIDSFeatureGenerator
+> Generating features...
+>> Loading raw packets...
+>> Preprocessing raw packets...
+>> Aggregating and labeling...
+Feature generator successfully executed!
+##### Loaded paths dictionary #####
+{
+    "config": {
+        "dataset": "TOW_IDS_dataset",
+        "labeling_schema": "TOW_IDS_dataset_multi_class",
+        "multiclass": true,
+        "number_of_bytes": 58,
+        "suffix": "test",
+        "window_size": 44,
+        "window_slide": 1
+    },
+    "feature_generator": "CNNIDSFeatureGenerator",
+    "paths": {
+        "output_path": "output/CNN",
+        "training_packets_path": "TOW_dataset/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap",
+        "y_train_path": "TOW_dataset/y_test.csv"
+    }
+}
+filter_avtp_packets = False
+> Selected feature generator: CNNIDSFeatureGenerator
+> Generating features...
+>> Loading raw packets...
+>> Preprocessing raw packets...
+>> Aggregating and labeling...
+Feature generator successfully executed!
