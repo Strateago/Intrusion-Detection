@@ -22,4 +22,4 @@ python3 $HOME/automotive-ids-evaluation-framework/execute_model_test.py --model_
 #criar um diretório de resultados para o modelo selecionado
 mkdir -p $HOME/automotive-ids-evaluation-framework/output/RF/results
 #salvar as imagens
-python3 $HOME/automotive-ids-evaluation-framework/output/plot_conf_matrix.py --path RF
+python3 $HOME/automotive-ids-evaluation-framework/output/plot_metrics.py --path RF
