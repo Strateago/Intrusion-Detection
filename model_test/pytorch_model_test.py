@@ -47,8 +47,8 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
 
         self._run_id = f"{datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_pytorch_test"
 
-        # TODO: Get this from json config file
-        art_path = output_path
+        # TODO: Get this from json config file (DONE)
+        art_path = os.path.dirname(output_path)
         self._artifacts_path = art_path
 
         if not os.path.exists(self._artifacts_path):
