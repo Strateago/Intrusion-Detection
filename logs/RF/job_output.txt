@@ -12,7 +12,7 @@
     },
     "feature_generator": "CNNIDSFeatureGenerator",
     "paths": {
-        "output_path": "output/RF",
+        "output_path": "output/TOW/RF",
         "training_packets_path": "TOW_dataset/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap",
         "y_train_path": "TOW_dataset/y_train.csv"
     }
@@ -38,7 +38,7 @@ Feature generator successfully executed!
     },
     "feature_generator": "CNNIDSFeatureGenerator",
     "paths": {
-        "output_path": "output/RF",
+        "output_path": "output/TOW/RF",
         "training_packets_path": "TOW_dataset/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap",
         "y_train_path": "TOW_dataset/y_test.csv"
     }
@@ -64,8 +64,8 @@ Feature generator successfully executed!
         },
         "feature_generator": "CNNIDSFeatureGenerator",
         "load_paths": {
-            "X_path": "output/RF/X_train_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
-            "y_path": "output/RF/y_train_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
+            "X_path": "output/TOW/RF/X_train_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
+            "y_path": "output/TOW/RF/y_train_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
         }
     },
     "model_specs": {
@@ -103,8 +103,8 @@ Feature generator successfully executed!
             "random_state": 42
         },
         "paths": {
-            "metrics_output_path": "output/RF/metrics",
-            "models_output_path": "output/RF/models"
+            "metrics_output_path": "output/TOW/RF/metrics",
+            "models_output_path": "output/TOW/RF/models"
         }
     }
 }
@@ -134,8 +134,8 @@ Executing main function...
         },
         "feature_generator": "CNNIDSFeatureGenerator",
         "load_paths": {
-            "X_path": "output/RF/X_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
-            "y_path": "output/RF/y_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
+            "X_path": "output/TOW/RF/X_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
+            "y_path": "output/TOW/RF/y_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
         }
     },
     "model_specs": {
@@ -174,11 +174,11 @@ Executing main function...
         },
         "paths": {
             "forward_output_path": "output/forward",
-            "metrics_output_path": "output/RF/metrics",
-            "models_output_path": "output/RF/models"
+            "metrics_output_path": "output/TOW/RF/metrics",
+            "models_output_path": "output/TOW/RF/models"
         },
         "presaved_paths": {
-            "entire": "output/RF/models/RandomForestClassifier_entire_dataset_.pkl"
+            "entire": "output/TOW/RF/models/RandomForestClassifier_entire_dataset_.pkl"
         }
     }
 }

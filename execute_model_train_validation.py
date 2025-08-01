@@ -29,11 +29,7 @@ AVAILABLE_FRAMEWORKS = {
     "sklearn": sklearn_model_train_validate.SklearnModelTrainValidation
 }
 
-def main():
-    parser = argparse.ArgumentParser(description='Execute model train validation step')
-    parser.add_argument('--model_train_valid_config', required=True, help='JSON File containing the config for the select model train validation procedure')
-    args = parser.parse_args()
-
+def main(args):
     try:
         with open(args.model_train_valid_config, 'r') as model_train_valid_config:
             model_train_valid_config_dict = json.load(model_train_valid_config)
@@ -48,6 +44,8 @@ def main():
 
     feat_gen_config_dict = model_train_valid_config_dict['feat_gen']
     model_specs_dict = model_train_valid_config_dict['model_specs']
+
+    output_path = model_train_valid_config_dict['model_specs']['paths']['models_output_path']
 
     feature_generator_name = feat_gen_config_dict['feature_generator']
     feature_generator_config = feat_gen_config_dict['config']
@@ -84,11 +82,15 @@ def main():
 
     print("> Initializing model training and evaluation...")
 
-    train_validator = AVAILABLE_FRAMEWORKS[framework](model, model_specs_dict)
+    train_validator = AVAILABLE_FRAMEWORKS[framework](model, model_specs_dict, output_path)
     train_validator.execute(data)
 
     print("Model trained successfully!")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description='Execute model train validation step')
+    parser.add_argument('--model_train_valid_config', required=True, help='JSON File containing the config for the select model train validation procedure')
+    args = parser.parse_args()
+
+    main(args)

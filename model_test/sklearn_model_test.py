@@ -23,7 +23,7 @@ from custom_metrics import (
 )
 
 class SklearnModelTest(abstract_model_test.AbstractModelTest):
-    def __init__(self, model, model_specs_dict: typing.Dict):
+    def __init__(self, model, model_specs_dict: typing.Dict, output_path: str):
         self._model = model
         self._model_name = model_specs_dict['model_specs']['model_name']
         self._presaved_models_paths_dict = model_specs_dict["model_specs"]["presaved_paths"]
@@ -33,7 +33,7 @@ class SklearnModelTest(abstract_model_test.AbstractModelTest):
         self._run_id = f"{datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_sklearn_test"
 
         # TODO: Get this from json config file
-        art_path = "output/RF"
+        art_path = os.path.dirname(output_path)
         self._artifacts_path = art_path
 
         if not os.path.exists(self._artifacts_path):

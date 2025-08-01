@@ -5,7 +5,7 @@ import typing
 
 class AbstractModelTrainValidate(abc.ABC):
     @abc.abstractmethod
-    def __init__(self, model, model_config_dict: typing.Dict):
+    def __init__(self, model, model_config_dict: typing.Dict, output_path: str):
         pass
 
     @abc.abstractmethod

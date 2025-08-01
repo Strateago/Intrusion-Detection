@@ -5,3 +5,5 @@ output/*/models/
 *.npz
 LICENSE
 TOW_dataset/
+datasets/
+feature_extracted/

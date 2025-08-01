@@ -28,7 +28,7 @@ from torchmetrics.classification import (
 )
 
 class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTrainValidate):
-    def __init__(self, model, model_config_dict: typing.Dict):
+    def __init__(self, model, model_config_dict: typing.Dict, output_path: str):
         self._model = model
 
         self._model_name = model_config_dict['model_name']
@@ -44,8 +44,9 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
         self._train_validation_losses = []
 
         self._run_id = f"{datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')}_pytorch_train"
-        # TODO: Get this from json config file
-        art_path = "output/CNN"
+
+        # TODO: Get this from json config file (DONE)
+        art_path = output_path
         self._artifacts_path = art_path
 
         if not os.path.exists(self._artifacts_path):
@@ -144,25 +145,6 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
             # zero the parameter gradients
             optimizer.zero_grad()
 
-            # # forward + backward + optimize
-            # # TODO: Later think a way this to be included inside model
-            # if (self._model_name == "MultiStageIDS"):
-            #     # Run stages
-            #     y1 = self._model.forward_first_stage(data)
-            #     y2 = self._model.forward_second_stage(data)
-
-            #     # Move to devices
-            #     y1 = y1.to(device)
-            #     y2 = y2.to(device)
-
-            #     print(f"y1 = {y1}")
-            #     print(f"y1.shape = {y1.shape}")
-            #     print(f"y2 = {y2}")
-            #     print(f"y2.shape = {y2.shape}")
-
-            #     # Combine data
-            #     data = torch.cat((y1, y2), axis=1)
-
             output = self._model(data)
             loss = criterion(output, target)
             loss.backward()
@@ -198,18 +180,6 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
                     target = target.reshape(-1, 1)
                 target = target.float()
 
-                # if (self._model_name == "MultiStageIDS"):
-                #     # Run stages
-                #     y1 = self._model.forward_first_stage(data)
-                #     y2 = self._model.forward_second_stage(data)
-
-                #     # Move to devices
-                #     y1 = y1.to(device)
-                #     y2 = y2.to(device)
-
-                #     # Combine data
-                #     data = torch.cat((y1, y2), axis=1)
-
                 output = self._model(data)
                 val_loss += criterion(output, target).item()  # sum up batch loss
 
@@ -241,18 +211,6 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
                 if len(target.shape) == 1:
                     target = target.reshape(-1, 1)
                 target = target.float()
-
-                # if (self._model_name == "MultiStageIDS"):
-                #     # Run stages
-                #     y1 = self._model.forward_first_stage(data)
-                #     y2 = self._model.forward_second_stage(data)
-
-                #     # Move to devices
-                #     y1 = y1.to(device)
-                #     y2 = y2.to(device)
-
-                #     # Combine data
-                #     data = torch.cat((y1, y2), axis=1)
 
                 output = self._model(data)
 
@@ -320,8 +278,6 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
         y = [item[1] for item in train_data]
         print(np.shape(y), '\n', np.unique(y))
 
-        # TODO: Find a better way to do this validation
-        # This is to check if y has more than one dimension, for the multiclass case to work with skf.split
         try:
             y = np.array(y).argmax(1)
         except:

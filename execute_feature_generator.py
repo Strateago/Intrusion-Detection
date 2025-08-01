@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 
 from feature_generator import cnn_ids_feature_generator
 
@@ -24,6 +25,8 @@ def main():
 
     print("##### Loaded paths dictionary #####")
     print(json.dumps(feat_gen_config_dict, indent=4, sort_keys=True))
+
+    os.makedirs(feat_gen_config_dict["paths"]["output_path"], exist_ok=True)
 
     feature_generator_name = feat_gen_config_dict['feature_generator']
     feature_generator_config = feat_gen_config_dict['config']

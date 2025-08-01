@@ -18,14 +18,6 @@ class ConvNetIDS(nn.Module):
             nn.MaxPool2d(kernel_size=2, stride=2)
         )
 
-        # self.binary_classification_layer = nn.Sequential(
-        #     nn.Dropout(p=0.3),
-        #     nn.Linear(in_features=20416, out_features=64),
-        #     nn.Dropout(p=0.3),
-        #     nn.ReLU(),
-        #     nn.Linear(in_features=64, out_features=1)
-        # )
-
         self.binary_classification_layer_fc1 = nn.Sequential(
             nn.Dropout(p=0.3),
             nn.Linear(in_features=20416, out_features=64),

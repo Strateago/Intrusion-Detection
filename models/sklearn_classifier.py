@@ -1,11 +1,21 @@
 import typing
 
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
+
+# Mapping of available models
 MODELS_FACTORY = {
-    "RandomForestClassifier": RandomForestClassifier
+    "RandomForestClassifier": RandomForestClassifier,
+    "LogisticRegression": LogisticRegression,
+    "SVC": SVC,
+    "XGBClassifier": XGBClassifier,
+    "LGBMClassifier": LGBMClassifier
 }
 
 class SklearnClassifier():
@@ -15,7 +25,7 @@ class SklearnClassifier():
         self._model_params = model_hyperparams["model_params"]
 
         if self._model_name not in MODELS_FACTORY:
-            raise KeyError(f"Selected model {self._model_name} is NOT available!")
+            raise KeyError(f"Selected model '{self._model_name}' is NOT available!")
 
         pipeline_steps = [
             ('scaler', StandardScaler()),
@@ -25,18 +35,20 @@ class SklearnClassifier():
         self._model = Pipeline(pipeline_steps)
 
     def reset(self):
-        self._model = MODELS_FACTORY[self._model_name](**self._model_params)
+        self._model = Pipeline([
+            ('scaler', StandardScaler()),
+            ('clf', MODELS_FACTORY[self._model_name](**self._model_params))
+        ])
 
     def train(self, X_data, y_data):
-        self._model = self._model.fit(X_data, y_data)
+        self._model.fit(X_data, y_data)
 
     def predict(self, X_data):
-        y_pred = self._model.predict(X_data)
-
-        return y_pred
+        return self._model.predict(X_data)
 
     def predict_proba(self, X_data):
-        y_pred_proba = self._model.predict_proba(X_data)
-
-        return y_pred_proba
-
+        clf = self._model.named_steps['clf']
+        if hasattr(clf, "predict_proba"):
+            return self._model.predict_proba(X_data)
+        else:
+            raise AttributeError(f"{self._model_name} does not support predict_proba.")

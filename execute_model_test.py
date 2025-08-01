@@ -51,6 +51,8 @@ def main():
     feat_gen_config_dict = model_test_config_dict['feat_gen']
     model_specs_dict = model_test_config_dict['model_specs']
 
+    output_path = model_test_config_dict['model_specs']['paths']['models_output_path']
+
     feature_generator_name = feat_gen_config_dict['feature_generator']
     feature_generator_config = feat_gen_config_dict['config']
     feature_generator_load_paths = feat_gen_config_dict['load_paths']
@@ -85,7 +87,7 @@ def main():
         model = AVAILABLE_IDS[model_name](model_specs_dict)
 
     print("> Initializing model test...")
-    test = AVAILABLE_FRAMEWORKS[framework](model, model_test_config_dict)
+    test = AVAILABLE_FRAMEWORKS[framework](model, model_test_config_dict, output_path)
     test.execute(data)
 
     print("Model tested successfully!")

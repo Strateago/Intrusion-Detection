@@ -1,0 +1,18 @@
+{
+    "feature_generator": "CNNIDSFeatureGenerator",
+    "config": {
+        "window_size": 44,
+        "window_slide": 1,
+        "number_of_bytes": 58,
+        "multiclass": false,
+        "labeling_schema": "TOW_IDS_dataset_one_class",
+        "dataset": "TOW_IDS_dataset",
+        "sum_x": true,
+	"suffix": "train"
+    },
+    "paths": {
+        "y_train_path": "datasets/TOW/y_train.csv",
+        "training_packets_path" : "datasets/TOW/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap",
+        "output_path": "feature_extracted/TOW/RF/train"
+    }
+}
