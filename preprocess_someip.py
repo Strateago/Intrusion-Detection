@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 
+#TODO: Change the test shape to become a 2D array (Not One Hot encoded)
 def main():
     parser = argparse.ArgumentParser(description="Preprocess the SOMEIP dataset")
     parser.add_argument("--path", type=str, required=True, help="Base path where the dataset is located.")
@@ -18,7 +19,7 @@ def main():
         if 'X' in file:
             data = np.sum(data, axis=1)
         else:
-            print(np.unique(data))
+            print(np.unique(data, return_counts=True))
         name = file.split('.')[0]
         print(name, ' ', data.shape)
         np.save(f'{path}/Preprocessed/{name}', data)

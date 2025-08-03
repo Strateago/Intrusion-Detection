@@ -21,7 +21,8 @@ DEFAULT_SUM_X = False
 LABELING_SCHEMA_FACTORY = {
     "AVTP_Intrusion_dataset": labeling_schemas.avtp_intrusion_labeling_schema,
     "TOW_IDS_dataset_one_class": labeling_schemas.tow_ids_one_class_labeling_schema,
-    "TOW_IDS_dataset_multi_class": labeling_schemas.tow_ids_multi_class_labeling_schema
+    "TOW_IDS_dataset_multi_class": labeling_schemas.tow_ids_multi_class_labeling_schema,
+    "SOMEIP_dataset": labeling_schemas.someip_labeling_schema
 }
 
 class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator):
@@ -46,7 +47,8 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
     def generate_features(self, paths_dictionary: typing.Dict):
         CNN_IDS_FEAT_GEN_AVAILABLE_DATASETS = {
             "AVTP_Intrusion_dataset": self.__avtp_dataset_generate_features,
-            "TOW_IDS_dataset": self.__tow_ids_dataset_generate_features
+            "TOW_IDS_dataset": self.__tow_ids_dataset_generate_features,
+            "SOMEIP_dataset": self.__someip_dataset_generate_features
         }
 
         if self._dataset not in CNN_IDS_FEAT_GEN_AVAILABLE_DATASETS:
@@ -123,6 +125,25 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
             np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", X)
             np.savez(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}", y)
 
+    def __someip_dataset_generate_features(self, paths_dictionary: typing.Dict):
+        print(">> Loading packets...")
+        labels = np.load(paths_dictionary["y_train_path"])
+        print(labels.shape)
+        packets = np.load(paths_dictionary["X_train_path"])
+        print(packets.shape)
+
+        # Preprocess packets
+        print(">> Preprocessing packets...")
+        preprocessed_packets = self.__preprocess_raw_packets(packets, split_into_nibbles=True)
+        
+        # Aggregate features and labels
+        print(">> Aggregating and labeling...")
+        aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels)
+
+        np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", aggregated_X)
+
+        y_df = pd.DataFrame(aggregated_y, columns=["Class"])
+        y_df.to_csv(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}.csv")
 
     def load_features(self, paths_dictionary: typing.Dict):
         X = np.load(paths_dictionary['X_path'])
