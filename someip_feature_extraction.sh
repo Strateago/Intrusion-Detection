@@ -12,7 +12,7 @@
 source $HOME/automotive-ids-evaluation-framework/venv/bin/activate
 
 # Preprocessing - SOMEIP
-python3 $HOME/automotive-ids-evaluation-framework/execute_preprocessor.py --path datasets/SOMEIP_IDS
+python3 $HOME/automotive-ids-evaluation-framework/preprocess_someip.py --path datasets/SOMEIP_IDS
 
 # RF Features - SOMEIP
 python3 $HOME/automotive-ids-evaluation-framework/execute_feature_generator.py --feat_gen_config config_jsons/SOMEIP/feature_generation/RF_train_feat_gen_config.json

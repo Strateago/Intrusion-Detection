@@ -129,13 +129,13 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
         print(">> Loading packets...")
         labels = np.load(paths_dictionary["y_train_path"])
         print(labels.shape)
-        packets = np.load(paths_dictionary["X_train_path"])
+        packets = np.load(paths_dictionary["training_packets_path"])
         print(packets.shape)
 
         # Preprocess packets
         print(">> Preprocessing packets...")
         preprocessed_packets = self.__preprocess_raw_packets(packets, split_into_nibbles=True)
-        
+
         # Aggregate features and labels
         print(">> Aggregating and labeling...")
         aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels)

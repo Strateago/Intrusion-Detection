@@ -58,7 +58,7 @@ def someip_labeling_schema(y_sequence):
     if attack_labels:
         labels, counts = np.unique(y_sequence, return_counts=True)
         sorted_labels = labels[np.argsort(-counts)]  # ordena por frequência decrescente
-
+        sorted_labels = np.int32(sorted_labels)
         for label in sorted_labels:
             if label != 0:
                 return SOMEIP_LABELS[label - 1]  # converte índice para nome
