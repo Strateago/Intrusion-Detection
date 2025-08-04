@@ -48,7 +48,7 @@ def tow_ids_multi_class_labeling_schema(y_sequence):
 
     return seq_y
 
-def someip_labeling_schema(y_sequence):
+def someip_multi_labeling_schema(y_sequence):
     # Expects y_sequence as a np.array
     # Labeling schema: if there is an attack in the sequence, the sequence is considered as an attack
     unique_labels = set(np.unique(y_sequence))  # valores únicos na sequência
@@ -62,5 +62,16 @@ def someip_labeling_schema(y_sequence):
         for label in sorted_labels:
             if label != 0:
                 return SOMEIP_LABELS[label - 1]  # converte índice para nome
+
+    return NORMAL_KEY
+
+def someip_one_labeling_schema(y_sequence):
+    # Expects y_sequence as a np.array
+    # Labeling schema: if there is an attack in the sequence, the sequence is considered as an attack
+    unique_labels = set(np.unique(y_sequence))  # valores únicos na sequência
+
+    for label in unique_labels:
+        if label != 0:
+            return SOMEIP_LABELS[label - 1]
 
     return NORMAL_KEY

@@ -5,7 +5,7 @@
         "window_slide": 1,
         "number_of_bytes": 58,
         "multiclass": true,
-        "labeling_schema": "SOMEIP_dataset",
+        "labeling_schema": "SOMEIP_dataset_multi_class",
         "dataset": "SOMEIP_dataset",
 	"suffix": "train"
     },

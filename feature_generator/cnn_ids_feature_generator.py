@@ -22,7 +22,8 @@ LABELING_SCHEMA_FACTORY = {
     "AVTP_Intrusion_dataset": labeling_schemas.avtp_intrusion_labeling_schema,
     "TOW_IDS_dataset_one_class": labeling_schemas.tow_ids_one_class_labeling_schema,
     "TOW_IDS_dataset_multi_class": labeling_schemas.tow_ids_multi_class_labeling_schema,
-    "SOMEIP_dataset": labeling_schemas.someip_labeling_schema
+    "SOMEIP_dataset_one_class": labeling_schemas.someip_one_labeling_schema,
+    "SOMEIP_dataset_multi_class": labeling_schemas.someip_multi_labeling_schema
 }
 
 class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator):
