@@ -72,6 +72,6 @@ def someip_one_labeling_schema(y_sequence):
 
     for label in unique_labels:
         if label != 0:
-            return SOMEIP_LABELS[label - 1]
+            return 1
 
-    return NORMAL_KEY
+    return 0

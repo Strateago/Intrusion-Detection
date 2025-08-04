@@ -168,6 +168,9 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
                     }
                 )
             y = np.array(y["Class"].values)
+        elif (self._dataset == "SOMEIP_dataset"):
+            y = pd.read_csv(paths_dictionary['y_path'])
+            y = np.array(y["Class"].values)
         else:
             y = np.load(paths_dictionary['y_path'])
             y = y.f.arr_0
