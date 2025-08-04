@@ -6,13 +6,13 @@
             "window_slide": 1,
             "number_of_bytes": 58,
             "multiclass": false,
-            "labeling_schema": "TOW_IDS_dataset_one_class",
-            "dataset": "TOW_IDS_dataset",
-	        "sum_x": true
+            "labeling_schema": "AVTP_Intrusion_dataset",
+            "dataset": "AVTP_Intrusion_dataset",
+            "sum_x": true
         },
         "load_paths": {
-            "X_path": "feature_extracted/TOW/detection/test/X_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
-            "y_path": "feature_extracted/TOW/detection/test/y_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
+            "X_path": "feature_extracted/AIED/detection/test/X_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
+            "y_path": "feature_extracted/AIED/detection/test/y_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz"
         }
     },
     "model_specs": {
@@ -20,9 +20,9 @@
         "model": "SklearnClassifier",
         "model_name": "RandomForestClassifier",
         "model_params": {
-            "n_estimators": 200,
-            "max_depth": 10,
-            "max_features": 7,
+            "n_estimators": 100,
+            "max_depth": 4,
+            "max_features": 3,
             "bootstrap": true,
             "random_state": 42
         },
@@ -34,12 +34,12 @@
             "clf__random_state": [42]
         },
         "paths": {
-            "metrics_output_path":"output/TOW/detection/metrics",
-            "models_output_path":"output/TOW/detection/models",
-            "forward_output_path":"output/TOW/detection/forward"
+            "metrics_output_path":"output/AIED/detection/metrics",
+            "models_output_path":"output/AIED/detection/models",
+            "forward_output_path":"output/AIED/detection/forward"
         },
         "presaved_paths": {
-            "entire": "output/TOW/detection/models/RandomForestClassifier_entire_dataset_.pkl"
+            "entire": "output/AIED/detection/models/RandomForestClassifier_entire_dataset_.pkl"
         }
     }
 }

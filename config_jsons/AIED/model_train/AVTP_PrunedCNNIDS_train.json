@@ -10,8 +10,8 @@
             "dataset": "AVTP_Intrusion_dataset"
         },
         "load_paths": {
-            "X_path": "feature_extracted/AIED/train/X_train_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False.npz",
-            "y_path": "feature_extracted/AIED/train/y_train_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False.npz"
+            "X_path": "feature_extracted/AIED/classification/train/X_train_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False.npz",
+            "y_path": "feature_extracted/AIED/classification/train/y_train_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False.npz"
         }
     },
     "model_specs": {
@@ -27,8 +27,8 @@
             "num_outputs": 1
         },
         "paths": {
-            "metrics_output_path":"output/AIED/CNN/metrics",
-            "models_output_path":"output/AIED/CNN/models"
+            "metrics_output_path":"output/AIED/classification/metrics",
+            "models_output_path":"output/AIED/classification/models"
         }
     }
 }

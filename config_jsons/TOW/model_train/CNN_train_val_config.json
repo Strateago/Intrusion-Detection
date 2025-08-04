@@ -10,8 +10,8 @@
             "dataset": "TOW_IDS_dataset"
         },
         "load_paths": {
-            "X_path": "feature_extracted/TOW/CNN/train/X_train_TOW_IDS_dataset_multi_class_Wsize_44_Cols_116_Wslide_1_MC_True_sumX_False.npz",
-            "y_path": "feature_extracted/TOW/CNN/train/y_train_TOW_IDS_dataset_multi_class_Wsize_44_Cols_116_Wslide_1_MC_True_sumX_False.csv"
+            "X_path": "feature_extracted/TOW/classification/train/X_train_TOW_IDS_dataset_multi_class_Wsize_44_Cols_116_Wslide_1_MC_True_sumX_False.npz",
+            "y_path": "feature_extracted/TOW/classification/train/y_train_TOW_IDS_dataset_multi_class_Wsize_44_Cols_116_Wslide_1_MC_True_sumX_False.csv"
         }
     },
     "model_specs": {
@@ -27,8 +27,8 @@
             "num_outputs": 6
         },
         "paths": {
-            "metrics_output_path":"output/TOW/CNN/metrics",
-            "models_output_path":"output/TOW/CNN/models"
+            "metrics_output_path":"output/TOW/classification/metrics",
+            "models_output_path":"output/TOW/classification/models"
         }
     }
 }
