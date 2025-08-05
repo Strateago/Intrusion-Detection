@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import os
 
-#TODO: Change the test shape to become a 2D array (Not One Hot encoded)
 def main():
     parser = argparse.ArgumentParser(description="Preprocess the SOMEIP dataset")
     parser.add_argument("--path", type=str, required=True, help="Base path where the dataset is located.")
@@ -18,8 +17,23 @@ def main():
         data = pd.read_pickle(f'{path}/{file}')
         if 'X' in file:
             data = np.sum(data, axis=1)
-        else:
+        elif 'test' in file:
+            aux = []
+            for i in range(len(data)):
+                if data[i][0] == 1:
+                    aux.append([0])
+                elif data[i][1] == 1:
+                    aux.append([1])
+                elif data[i][2] == 1:
+                    aux.append([2])
+                elif data[i][3] == 1:
+                    aux.append([3])
+                else:
+                    aux.append([4])
+            data = np.array(aux)
+        if 'Y' in file:
             print(np.unique(data, return_counts=True))
+
         name = file.split('.')[0]
         print(name, ' ', data.shape)
         np.save(f'{path}/Preprocessed/{name}', data)
