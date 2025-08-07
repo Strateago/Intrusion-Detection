@@ -27,8 +27,8 @@
             "random_state": 42
         },
         "paths": {
-            "metrics_output_path":"output/AIED/RF/metrics",
-            "models_output_path":"output/AIED/RF/models"
+            "metrics_output_path":"output/AIED/detection/metrics",
+            "models_output_path":"output/AIED/detection/models"
         }
     }
 }

@@ -18,4 +18,4 @@ python3 $HOME/Intrusion-Detection/execute_model_train_validation.py --model_trai
 python3 $HOME/Intrusion-Detection/execute_model_test.py --model_test_config config_jsons/AIED/model_test/AVTP_RandomForest_test.json
 
 # Metrics extraction
-python3 $HOME/Intrusion-Detection/plot_metrics.py --path output/AIED/RF
+python3 $HOME/Intrusion-Detection/plot_metrics.py --path output/AIED/detection

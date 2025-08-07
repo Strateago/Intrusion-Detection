@@ -8,11 +8,11 @@
             "multiclass": false,
             "labeling_schema": "AVTP_Intrusion_dataset",
             "dataset": "AVTP_Intrusion_dataset",
-            "sum_x": true
+            "sum_x": false
         },
         "load_paths": {
-            "X_path": "feature_extracted/AIED/classification/test/X_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
-            "y_path": "feature_extracted/AIED/classification/test/y_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz"
+            "X_path": "feature_extracted/AIED/classification/test/X_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_False.npz",
+            "y_path": "feature_extracted/AIED/classification/test/y_test_AVTP_Intrusion_dataset_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_False.npz"
         }
     },
     "model_specs": {
@@ -21,11 +21,11 @@
         "model_name": "PrunedCNNIDS",
         "criterion": "categorical-cross-entropy",
         "hyperparameters": {
-            "batch_size": 32,
+            "batch_size": 1024,
             "learning_rate": 0.001,
             "num_epochs": 30,
             "early_stopping_patience": 5,
-            "num_outputs": 6
+            "num_outputs": 1
         },
         "paths": {
             "metrics_output_path":"output/AIED/classification/metrics",
