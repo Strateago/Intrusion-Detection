@@ -171,7 +171,7 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
                 accuracy_metric.update(output, target)
                 f1_score_metric.update(output, target)
                 # TODO: Find a better way to perform this computation
-                if self._number_of_outputs == 6:
+                if self._number_of_outputs > 1:
                     auc_roc_metric.update(output, torch.argmax(target, dim=1))
                 else:
                     auc_roc_metric.update(output, target)
@@ -189,18 +189,18 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
             # TODO: Esse reshape deve ocorrer apenas se for necessário
             y_pred_conf_matrix = y_pred
             y_true_conf_matrix = y_true
-            if self._number_of_outputs == 6:
+            if self._number_of_outputs > 1:
                 y_pred_conf_matrix = torch.argmax(y_pred, dim=1)
                 y_true_conf_matrix = torch.argmax(y_true, dim=1)
             confusion_matrix = confusion_matrix_metric(y_pred_conf_matrix, y_true_conf_matrix)
 
             # TODO: encontrar uma forma melhor de fazer esse reshape
             y_true_roc = y_true.to(torch.int32)
-            if self._number_of_outputs == 6:
+            if self._number_of_outputs > 1:
                 y_true_roc = torch.argmax(y_true_roc, dim=1)
             fpr, tpr, thresholds = roc_metric(y_pred, y_true_roc)
 
-            if self._number_of_outputs == 6:
+            if self._number_of_outputs > 1:
                 self._fpr_multiclass = fpr.T.cpu().numpy()
                 self._tpr_multiclass = tpr.T.cpu().numpy()
                 self._thresholds_multiclass = thresholds.T.cpu().numpy()
@@ -270,7 +270,7 @@ class PytorchModelTest(abstract_model_test.AbstractModelTest):
             confusion_matrix_df = pd.DataFrame(self._confusion_matrix)
             confusion_matrix_df.to_csv(f"{self._metrics_output_path}/confusion_matrix_{self._labeling_schema}_fold_{fold_index}_{self._model_name}.csv")
 
-            if self._number_of_outputs == 6:
+            if self._number_of_outputs > 1:
                 tpr_df = pd.DataFrame(self._tpr_multiclass)
                 fpr_df = pd.DataFrame(self._fpr_multiclass)
                 thresholds_df = pd.DataFrame(self._thresholds_multiclass)
