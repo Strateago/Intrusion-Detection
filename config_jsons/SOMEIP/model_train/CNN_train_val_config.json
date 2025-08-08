@@ -24,7 +24,7 @@
             "learning_rate": 0.001,
             "num_epochs": 30,
             "early_stopping_patience": 5,
-            "num_outputs": 6
+            "num_outputs": 5
         },
         "paths": {
             "metrics_output_path":"output/SOMEIP/CNN/metrics",

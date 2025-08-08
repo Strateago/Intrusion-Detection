@@ -1,7 +1,6 @@
 import numpy as np
 
 TOW_IDS_ATTACK_LABELS = ["C_D", "C_R", "M_F", "F_I", "P_I"]
-SOMEIP_LABELS = ["Err_Event", "Err_Error", "Miss_Resp", "Miss_Request"]
 NORMAL_KEY = "Normal"
 ABNORMAL_KEY = "Abnormal"
 INDEX_COLUMN = "index"
@@ -61,9 +60,9 @@ def someip_multi_labeling_schema(y_sequence):
         sorted_labels = np.int32(sorted_labels)
         for label in sorted_labels:
             if label != 0:
-                return SOMEIP_LABELS[label - 1]  # converte índice para nome
+                return label 
 
-    return NORMAL_KEY
+    return 0
 
 def someip_one_labeling_schema(y_sequence):
     # Expects y_sequence as a np.array
