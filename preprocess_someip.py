@@ -2,6 +2,7 @@ import argparse
 import pandas as pd
 import numpy as np
 import os
+import numpy as np
 
 def main():
     parser = argparse.ArgumentParser(description="Preprocess the SOMEIP dataset")
@@ -16,7 +17,8 @@ def main():
             continue
         data = pd.read_pickle(f'{path}/{file}')
         if 'X' in file:
-            data = np.sum(data, axis=1)
+            # Adjusting the shape of the data
+            data = data.reshape(-1, data.shape[-1])
         elif 'test' in file:
             aux = []
             for i in range(len(data)):
@@ -32,6 +34,8 @@ def main():
                     aux.append([4])
             data = np.array(aux)
         if 'Y' in file:
+            # Repeat the labels of each group to the 60 packets of the group
+            data = np.repeat(data, 60)
             print(np.unique(data, return_counts=True))
 
         name = file.split('.')[0]
