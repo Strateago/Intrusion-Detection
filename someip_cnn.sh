@@ -8,6 +8,9 @@
 #SBATCH --output=logs/CNN/job_output.txt
 #SBATCH --error=logs/CNN/job_error.txt
 
+# Load  python
+module load Python/3.10
+
 # Ambient activate
 source $HOME/automotive-ids-evaluation-framework/venv/bin/activate
 
@@ -18,4 +21,4 @@ python3 $HOME/automotive-ids-evaluation-framework/execute_model_train_validation
 python3 $HOME/automotive-ids-evaluation-framework/execute_model_test.py --model_test_config config_jsons/SOMEIP/model_test/CNN_test_config.json
 
 # Metrics extraction
-python3 $HOME/automotive-ids-evaluation-framework/plot_metrics.py --path CNN
+python3 $HOME/automotive-ids-evaluation-framework/plot_metrics.py --path output/SOMEIP/CNN
