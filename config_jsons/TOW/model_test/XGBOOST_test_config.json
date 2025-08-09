@@ -8,7 +8,7 @@
             "multiclass": false,
             "labeling_schema": "TOW_IDS_dataset_one_class",
             "dataset": "TOW_IDS_dataset",
-	        "sum_x": true
+            "sum_x": true
         },
         "load_paths": {
             "X_path": "feature_extracted/TOW/detection/test/X_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
@@ -18,28 +18,32 @@
     "model_specs": {
         "framework": "sklearn",
         "model": "SklearnClassifier",
-        "model_name": "RandomForestClassifier",
+        "model_name": "XGBClassifier",
         "model_params": {
             "n_estimators": 200,
             "max_depth": 10,
-            "max_features": 7,
-            "bootstrap": true,
-            "random_state": 42
+            "learning_rate": 0.1,
+            "subsample": 1.0,
+            "colsample_bytree": 1.0,
+            "random_state": 42,
+            "use_label_encoder": false,
+            "eval_metric": "logloss"
         },
         "hyperparams_grid": {
             "clf__n_estimators": [50, 100, 200],
             "clf__max_depth": [4, 6, 10],
-            "clf__max_features": [3, 5, 7],
-            "clf__bootstrap": [true],
+            "clf__learning_rate": [0.01, 0.1, 0.2],
+            "clf__subsample": [0.8, 1.0],
+            "clf__colsample_bytree": [0.8, 1.0],
             "clf__random_state": [42]
         },
         "paths": {
-            "metrics_output_path":"output/TOW/RF/metrics",
-            "models_output_path":"output/TOW/RF/models",
-            "forward_output_path":"output/TOW/RF/forward"
+            "metrics_output_path": "output/TOW/XGB/metrics",
+            "models_output_path": "output/TOW/XGB/models",
+            "forward_output_path": "output/TOW/XGB/forward"
         },
         "presaved_paths": {
-            "entire": "output/TOW/RF/models/RandomForestClassifier_entire_dataset_.pkl"
+            "entire": "output/TOW/XGB/models/XGBClassifier_entire_dataset_.pkl"
         }
     }
 }

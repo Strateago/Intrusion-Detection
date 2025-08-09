@@ -27,16 +27,16 @@
             "num_outputs": 6
         },
         "paths": {
-            "metrics_output_path":"output/TOW/classification/metrics",
-            "models_output_path":"output/TOW/classification/models",
-            "forward_output_path":"output/TOW/classification/forward"
+            "metrics_output_path":"output/TOW/CNN/metrics",
+            "models_output_path":"output/TOW/CNN/models",
+            "forward_output_path":"output/TOW/CNN/forward"
         },
         "presaved_paths": {
-            "fold_0": "output/TOW/classification/models/pytorch_model_PrunedCNNIDS_0",
-            "fold_1": "output/TOW/classification/models/pytorch_model_PrunedCNNIDS_1",
-            "fold_2": "output/TOW/classification/models/pytorch_model_PrunedCNNIDS_2",
-            "fold_3": "output/TOW/classification/models/pytorch_model_PrunedCNNIDS_3",
-            "fold_4": "output/TOW/classification/models/pytorch_model_PrunedCNNIDS_4"
+            "fold_0": "output/TOW/CNN/models/pytorch_model_PrunedCNNIDS_0",
+            "fold_1": "output/TOW/CNN/models/pytorch_model_PrunedCNNIDS_1",
+            "fold_2": "output/TOW/CNN/models/pytorch_model_PrunedCNNIDS_2",
+            "fold_3": "output/TOW/CNN/models/pytorch_model_PrunedCNNIDS_3",
+            "fold_4": "output/TOW/CNN/models/pytorch_model_PrunedCNNIDS_4"
         }
     }
 }

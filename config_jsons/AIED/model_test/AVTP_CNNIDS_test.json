@@ -28,16 +28,16 @@
             "num_outputs": 1
         },
         "paths": {
-            "metrics_output_path":"output/AIED/classification/metrics",
-            "models_output_path":"output/AIED/classification/models",
-            "forward_output_path":"output/AIED/classification/forward"
+            "metrics_output_path":"output/AIED/CNN/metrics",
+            "models_output_path":"output/AIED/CNN/models",
+            "forward_output_path":"output/AIED/CNN/forward"
         },
         "presaved_paths": {
-            "fold_0": "output/AIED/classification/models/pytorch_model_PrunedCNNIDS_0",
-            "fold_1": "output/AIED/classification/models/pytorch_model_PrunedCNNIDS_1",
-            "fold_2": "output/AIED/classification/models/pytorch_model_PrunedCNNIDS_2",
-            "fold_3": "output/AIED/classification/models/pytorch_model_PrunedCNNIDS_3",
-            "fold_4": "output/AIED/classification/models/pytorch_model_PrunedCNNIDS_4"
+            "fold_0": "output/AIED/CNN/models/pytorch_model_PrunedCNNIDS_0",
+            "fold_1": "output/AIED/CNN/models/pytorch_model_PrunedCNNIDS_1",
+            "fold_2": "output/AIED/CNN/models/pytorch_model_PrunedCNNIDS_2",
+            "fold_3": "output/AIED/CNN/models/pytorch_model_PrunedCNNIDS_3",
+            "fold_4": "output/AIED/CNN/models/pytorch_model_PrunedCNNIDS_4"
         }
     }
 }

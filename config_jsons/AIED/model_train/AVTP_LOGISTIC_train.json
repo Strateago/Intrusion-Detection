@@ -18,17 +18,17 @@
     "model_specs": {
         "framework": "sklearn",
         "model": "SklearnClassifier",
-        "model_name": "RandomForestClassifier",
+        "model_name": "LogisticRegression",
         "model_params": {
-            "n_estimators": 100,
-            "max_depth": 4,
-            "max_features": 3,
-            "bootstrap": true,
+            "C": 1.0,
+            "penalty": "l2",
+            "solver": "lbfgs",
+            "max_iter": 1000,
             "random_state": 42
         },
         "paths": {
-            "metrics_output_path":"output/AIED/RF/metrics",
-            "models_output_path":"output/AIED/RF/models"
+            "metrics_output_path": "output/AIED/LR/metrics",
+            "models_output_path": "output/AIED/LR/models"
         }
     }
 }

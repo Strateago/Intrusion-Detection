@@ -27,8 +27,8 @@
             "num_outputs": 1
         },
         "paths": {
-            "metrics_output_path":"output/AIED/classification/metrics",
-            "models_output_path":"output/AIED/classification/models"
+            "metrics_output_path":"output/AIED/CNN/metrics",
+            "models_output_path":"output/AIED/CNN/models"
         }
     }
 }

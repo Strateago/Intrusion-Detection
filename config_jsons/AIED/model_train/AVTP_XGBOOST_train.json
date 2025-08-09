@@ -18,17 +18,20 @@
     "model_specs": {
         "framework": "sklearn",
         "model": "SklearnClassifier",
-        "model_name": "RandomForestClassifier",
+        "model_name": "XGBClassifier",
         "model_params": {
             "n_estimators": 100,
             "max_depth": 4,
-            "max_features": 3,
-            "bootstrap": true,
-            "random_state": 42
+            "learning_rate": 0.1,
+            "subsample": 1.0,
+            "colsample_bytree": 1.0,
+            "random_state": 42,
+            "use_label_encoder": false,
+            "eval_metric": "logloss"
         },
         "paths": {
-            "metrics_output_path":"output/AIED/RF/metrics",
-            "models_output_path":"output/AIED/RF/models"
+            "metrics_output_path": "output/AIED/XGB/metrics",
+            "models_output_path": "output/AIED/XGB/models"
         }
     }
 }

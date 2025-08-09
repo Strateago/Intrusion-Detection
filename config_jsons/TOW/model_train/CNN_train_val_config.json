@@ -27,8 +27,8 @@
             "num_outputs": 6
         },
         "paths": {
-            "metrics_output_path":"output/TOW/classification/metrics",
-            "models_output_path":"output/TOW/classification/models"
+            "metrics_output_path":"output/TOW/CNN/metrics",
+            "models_output_path":"output/TOW/CNN/models"
         }
     }
 }
