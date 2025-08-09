@@ -1,21 +1,11 @@
-#!/bin/bash
-#SBATCH --job-name=PruCNN
-#SBATCH --gpus=1
-#SBATCH --ntasks=1
-#SBATCH --mem 16G
-#SBATCH -c 8
-#SBATCH -o logs/CNN/job.log
-#SBATCH --output=logs/CNN/job_output.txt
-#SBATCH --error=logs/CNN/job_error.txt
-
 # Ambient activate
 source $HOME/Intrusion-Detection/venv/bin/activate
 
 # Model train
-python3 $HOME/Intrusion-Detection/execute_model_train_validation.py --model_train_valid_config config_jsons/AIED/model_train/AVTP_PrunedCNNIDS_train.json
+python3 $HOME/Intrusion-Detection/scripts/execute_model_train_validation.py --model_train_valid_config config_jsons/AIED/model_train/AVTP_PrunedCNNIDS_train.json
 
 # Model test
-python3 $HOME/Intrusion-Detection/execute_model_test.py --model_test_config config_jsons/AIED/model_test/AVTP_CNNIDS_test.json
+python3 $HOME/Intrusion-Detection/scripts/execute_model_test.py --model_test_config config_jsons/AIED/model_test/AVTP_CNNIDS_test.json
 
 # Metrics extraction
-python3 $HOME/Intrusion-Detection/plot_metrics.py --path output/AIED/classification
+python3 $HOME/Intrusion-Detection/scripts/plot_metrics.py --path output/AIED/classification
