@@ -7,3 +7,9 @@ LICENSE
 TOW_dataset/
 datasets/
 feature_extracted/
+
+git reset
+
+
+images/aeid_images/
+images/tow_images/
