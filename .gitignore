@@ -8,3 +8,9 @@ TOW_dataset/
 datasets/
 feature_extracted/
 SOMEIP_IDS/
+
+git reset
+
+
+images/aeid_images/
+images/tow_images/

@@ -8,12 +8,11 @@
             "multiclass": false,
             "labeling_schema": "TOW_IDS_dataset_one_class",
             "dataset": "TOW_IDS_dataset",
-	    "sum_x": true
-
+	        "sum_x": true
         },
         "load_paths": {
-            "X_path": "feature_extracted/TOW/RF/test/X_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
-            "y_path": "feature_extracted/TOW/RF/test/y_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
+            "X_path": "feature_extracted/TOW/detection/test/X_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.npz",
+            "y_path": "feature_extracted/TOW/detection/test/y_test_TOW_IDS_dataset_one_class_Wsize_44_Cols_116_Wslide_1_MC_False_sumX_True.csv"
         }
     },
     "model_specs": {

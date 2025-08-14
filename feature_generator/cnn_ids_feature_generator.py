@@ -4,6 +4,7 @@ import numpy as np
 import typing
 import time
 from scapy.all import *
+from scapy.utils import RawPcapReader
 
 from . import abstract_feature_generator
 from . import labeling_schemas
@@ -92,39 +93,35 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
         y_df = pd.DataFrame(aggregated_y, columns=["Class"])
         y_df.to_csv(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}.csv")
 
+
     def __avtp_dataset_generate_features(self, paths_dictionary: typing.Dict):
         raw_injected_only_packets = self.__read_raw_packets(paths_dictionary['injected_only_frame_path'])
         injected_only_packets_array = self.__convert_raw_packets(raw_injected_only_packets)
 
-        if self._sum_x:
-            X = np.empty(shape=(0, self._number_of_columns), dtype='uint8')
-        else:
-            X = np.empty(shape=(0, self._window_size, self._number_of_columns), dtype='uint8')
-        y = np.array([], dtype='uint8')
+        X_list = []
+        y_list = []
 
         for injected_raw_packets_path in paths_dictionary['injected_data_paths']:
-            # Load raw packets
             raw_packets = self.__read_raw_packets(injected_raw_packets_path)
-
-            # Convert loaded packets to np array with uint8_t size
             packets_array = self.__convert_raw_packets(raw_packets)
-
-            # Preprocess packets
             preprocessed_packets = self.__preprocess_raw_packets(packets_array, split_into_nibbles=True)
-
-            # Generate labels
             labels = self.__generate_labels(packets_array, injected_only_packets_array)
 
-            # Aggregate features and labels
             aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels)
-            aggregated_y = np.array(aggregated_y, dtype='uint8')
 
-            # Concatenate both indoors injected packets
-            X = np.concatenate((X, aggregated_X), axis=0, dtype='uint8')
-            y = np.concatenate((y, aggregated_y), axis=0, dtype='uint8')
+            X_list.append(aggregated_X)
+            y_list.append(np.array(aggregated_y, dtype='uint8'))
 
-            np.savez(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", X)
-            np.savez(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}", y)
+            # Memory free
+            del raw_packets, packets_array, preprocessed_packets, labels, aggregated_X, aggregated_y
+            gc.collect()
+
+        X = np.concatenate(X_list, axis=0).astype('uint8')
+        y = np.concatenate(y_list, axis=0).astype('uint8')
+
+        np.savez_compressed(f"{paths_dictionary['output_path']}/X_{self._data_suffix}_{self._output_path_suffix}", X)
+        np.savez_compressed(f"{paths_dictionary['output_path']}/y_{self._data_suffix}_{self._output_path_suffix}", y)
+
 
     def __someip_dataset_generate_features(self, paths_dictionary: typing.Dict):
         print(">> Loading packets...")
@@ -184,17 +181,16 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
 
         return [[X[i], y[i]] for i in range(X.shape[0])]
 
-    def __read_raw_packets(self, pcap_filepath):
-        raw_packets = rdpcap(pcap_filepath)
 
+    def __read_raw_packets(self, pcap_filepath):
         raw_packets_list = []
 
-        for packet in raw_packets:
+        for pkt_data, _ in RawPcapReader(pcap_filepath):
             if self._filter_avtp_packets:
-                if (len(packet) == AVTP_PACKETS_LENGHT):
-                    raw_packets_list.append(raw(packet))
+                if len(pkt_data) == AVTP_PACKETS_LENGHT:
+                    raw_packets_list.append(pkt_data)
             else:
-                raw_packets_list.append(raw(packet))
+                raw_packets_list.append(pkt_data)
 
         return raw_packets_list
 
@@ -348,11 +344,6 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
         print(">> Benchmarking feature generator execution time")
         n_iter = 10000
         execution_time_list = []
-        # preprocess_time_list = []
-        # agg_time_list = []
-        # select_time_list = []
-        # diff_time_list = []
-        # nibble_time_list = []
 
         labels=0
 
@@ -364,58 +355,18 @@ class CNNIDSFeatureGenerator(abstract_feature_generator.AbstractFeatureGenerator
             start_time = time.perf_counter_ns()
             # Preprocess packets
             preprocessed_packets = self.__preprocess_raw_packets(random_packets, split_into_nibbles=True)
-            # Select first 58 bytes
-            # selected_packets = self.__select_packets_bytes(random_packets)
-            # select_bytes_time = time.perf_counter_ns()
-
-            # Calculate difference and module between rows
-            # diff_module_packets = self.__calculate_difference_module(selected_packets)
-            # diff_module_time = time.perf_counter_ns()
-
-            # Split difference into two nibbles
-            # diff_module_packets = self.__split_into_nibbles(diff_module_packets)
-            # preprocess_end = time.perf_counter_ns()
 
             # Aggregate features and labels
             aggregated_X, aggregated_y = self.__aggregate_based_on_window_size(preprocessed_packets, labels)
             # end_time = time.time()
             end_time = time.perf_counter_ns()
             elapsed_total_time = end_time - start_time
-            # elapsed_agg_time = end_time - preprocess_end
-            # elapsed_preprocess_time = preprocess_end - start_time
-            # elapsed_select_time = select_bytes_time - start_time
-            # elapsed_diff_time = diff_module_time - select_bytes_time
-            # elapsed_nibble_time = preprocess_end - diff_module_time
 
             execution_time_list.append(elapsed_total_time)
-            # preprocess_time_list.append(elapsed_preprocess_time)
-            # agg_time_list.append(elapsed_agg_time)
-            # select_time_list.append(elapsed_agg_time)
-            # diff_time_list.append(elapsed_diff_time)
-            # nibble_time_list.append(elapsed_nibble_time)
 
         # Compute the elapsed time
         mean_execution_time = np.mean(execution_time_list)
         std_execution_time = np.std(execution_time_list)
 
-        # mean_preprocess_time = np.mean(preprocess_time_list)
-        # std_preprocess_time = np.std(preprocess_time_list)
-
-        # mean_agg_time = np.mean(agg_time_list)
-        # std_agg_time = np.std(agg_time_list)
-
-        # mean_select_time = np.mean(select_time_list)
-        # std_select_time = np.std(select_time_list)
-
-        # mean_diff_time = np.mean(diff_time_list)
-        # std_diff_time = np.std(diff_time_list)
-
-        # mean_nibble_time = np.mean(nibble_time_list)
-        # std_nibble_time = np.std(nibble_time_list)
 
         print(f"Mean execution time: {mean_execution_time}, Std: {std_execution_time}")
-        # print(f"Mean preprocess time: {mean_preprocess_time}, Std: {std_preprocess_time}")
-        # print(f"Mean select time: {mean_select_time}, Std: {std_select_time}")
-        # print(f"Mean diff time: {mean_diff_time}, Std: {std_diff_time}")
-        # print(f"Mean nibble time: {mean_nibble_time}, Std: {std_nibble_time}")
-        # print(f"Mean agg time: {mean_agg_time}, Std: {std_agg_time}")

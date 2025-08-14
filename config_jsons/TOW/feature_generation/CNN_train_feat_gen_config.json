@@ -12,6 +12,6 @@
     "paths": {
         "y_train_path": "datasets/TOW/y_train.csv",
         "training_packets_path" : "datasets/TOW/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap",
-        "output_path": "feature_extracted/TOW/CNN/train"
+        "output_path": "feature_extracted/TOW/classification/train"
     }
 }
