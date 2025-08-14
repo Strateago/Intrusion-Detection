@@ -217,7 +217,7 @@ class PytorchModelTrainValidation(abstract_model_train_validate.AbstractModelTra
                 accuracy_metric.update(output.detach(), target)
                 f1_score_metric.update(output.detach(), target)
                 # TODO: Find a better way to perform this computation
-                if self._number_of_outputs == 6:
+                if self._number_of_outputs > 1:
                     auc_roc_metric.update(output.detach(), torch.argmax(target, dim=1))
                 else:
                     auc_roc_metric.update(output.detach(), target)

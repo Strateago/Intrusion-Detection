@@ -6,16 +6,16 @@ from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-from xgboost import XGBClassifier
-from lightgbm import LGBMClassifier
+#from xgboost import XGBClassifier
+#from lightgbm import LGBMClassifier
 
 # Mapping of available models
 MODELS_FACTORY = {
     "RandomForestClassifier": RandomForestClassifier,
     "LogisticRegression": LogisticRegression,
-    "SVC": SVC,
-    "XGBClassifier": XGBClassifier,
-    "LGBMClassifier": LGBMClassifier
+    "SVC": SVC
+    #"XGBClassifier": XGBClassifier,
+    #"LGBMClassifier": LGBMClassifier
 }
 
 class SklearnClassifier():

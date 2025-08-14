@@ -1,3 +1,5 @@
+import numpy as np
+
 TOW_IDS_ATTACK_LABELS = ["C_D", "C_R", "M_F", "F_I", "P_I"]
 NORMAL_KEY = "Normal"
 ABNORMAL_KEY = "Abnormal"
@@ -44,3 +46,31 @@ def tow_ids_multi_class_labeling_schema(y_sequence):
         seq_y = indexes_attacks[INDEX_COLUMN].values[0]
 
     return seq_y
+
+def someip_multi_labeling_schema(y_sequence):
+    # Expects y_sequence as a np.array
+    # Labeling schema: if there is an attack in the sequence, the sequence is considered as an attack
+    unique_labels = set(np.unique(y_sequence))  # valores únicos na sequência
+
+    attack_labels = {label for label in unique_labels if label != 0}  # ataques
+
+    if attack_labels:
+        labels, counts = np.unique(y_sequence, return_counts=True)
+        sorted_labels = labels[np.argsort(-counts)]  # ordena por frequência decrescente
+        sorted_labels = np.int32(sorted_labels)
+        for label in sorted_labels:
+            if label != 0:
+                return label 
+
+    return 0
+
+def someip_one_labeling_schema(y_sequence):
+    # Expects y_sequence as a np.array
+    # Labeling schema: if there is an attack in the sequence, the sequence is considered as an attack
+    unique_labels = set(np.unique(y_sequence))  # valores únicos na sequência
+
+    for label in unique_labels:
+        if label != 0:
+            return 1
+
+    return 0
